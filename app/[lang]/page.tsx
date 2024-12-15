@@ -1,6 +1,5 @@
 import { Metadata } from "next"
-import { Button } from "components/atoms/Button/Button"
-
+import { getDictionary, LocalEnum } from "./dictionaries"
 export const metadata: Metadata = {
   title: "Next.js Enterprise Boilerplate",
   twitter: {
@@ -18,6 +17,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Web() {
-  return <div>hello world</div>
+export default async function Web({ params }: { params: Promise<{ lang: LocalEnum }> }) {
+  const dict = await getDictionary((await params).lang) // en
+  return <div>{dict.products.cart}</div>
 }
