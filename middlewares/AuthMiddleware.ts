@@ -4,12 +4,18 @@ import { MiddlewareFactoryType } from "./StackHandler"
 
 export const AuthMiddleware: MiddlewareFactoryType = (next) => {
   return async (request: NextRequest, event: NextFetchEvent): Promise<NextResponse> => {
-    console.log("Executing AuthMiddleware...")
     const clerkResponse = await clerkMiddleware()(request, event)
 
+    const { pathname } = request.nextUrl
+    if (pathname.split("/").includes("panel") || pathname.split("/").includes("setting")) {
+      return NextResponse.redirect(new URL("/login", request.nextUrl.origin).toString())
+    }
+
     if (clerkResponse) {
-      console.log("Clerk returned a response:", clerkResponse)
-      return clerkResponse
+      return new NextResponse(clerkResponse.body, {
+        status: clerkResponse.status,
+        headers: clerkResponse.headers,
+      })
     }
 
     return next(request, event)

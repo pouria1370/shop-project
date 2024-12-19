@@ -19,9 +19,7 @@ const RegisterForm = () => {
     resolver: zodResolver(RegisterFormSchema),
   })
 
-  const onSubmit: SubmitHandler<RegisterFormSchemaType> = () => {
-    console.log("first")
-  }
+  const onSubmit: SubmitHandler<RegisterFormSchemaType> = () => {}
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">

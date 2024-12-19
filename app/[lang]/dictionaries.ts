@@ -10,8 +10,6 @@ const dictionaries = {
 
 // export const getDictionary = async (locale: LocalEnum) => dictionaries[locale]()
 export const getDictionary = async (locale: LocalEnum) => {
-  console.log("Locale received:", locale)
-
   const loadDictionary = dictionaries[locale]
 
   if (typeof loadDictionary !== "function") {

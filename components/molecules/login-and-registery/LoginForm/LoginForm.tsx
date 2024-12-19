@@ -19,9 +19,7 @@ const LoginForm = () => {
     resolver: zodResolver(LoginFormSchema),
   })
 
-  const onSubmit: SubmitHandler<LoginFormSchemaType> = () => {
-    console.log("first")
-  }
+  const onSubmit: SubmitHandler<LoginFormSchemaType> = () => {}
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex size-full flex-col justify-center space-y-8 ">
